@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.author        = 'Bruno Oliveira'
   spec.email         = 'bm.oliveira.dev@gmail.com'
 
-  spec.summary       = 'Gradle actions to deploy a module from an Android project'
-  # spec.homepage      = "https://github.com/<GITHUB_USERNAME>/fastlane-plugin-deploy_module_bintray"
+  spec.summary       = 'Gradle action to deploy a Module from an Android project'
+  spec.homepage      = "https://github.com/bmoliveira/fastlane-plugin-deploy_module_bintray"
   spec.license       = "MIT"
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
@@ -20,9 +20,6 @@ Gem::Specification.new do |spec|
 
   # Don't add a dependency to fastlane or fastlane_re
   # since this would cause a circular dependency
-
-  # spec.add_dependency 'your-dependency', '~> 1.0.0'
-
   spec.add_development_dependency('pry')
   spec.add_development_dependency('bundler')
   spec.add_development_dependency('rspec')
