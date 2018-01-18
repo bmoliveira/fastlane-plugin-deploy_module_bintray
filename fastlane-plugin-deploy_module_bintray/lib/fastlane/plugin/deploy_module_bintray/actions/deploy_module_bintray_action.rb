@@ -6,9 +6,8 @@ module Fastlane
     class DeployModuleBintrayAction < Action
       def self.run(params)
         module_name = params[:module_name]
-        should_clean = params[:should_clean] ?: false
         UI.message "Deploying module: #{module_name} to bintray"
-        if should_clean?
+        if params[:should_clean]
           UI.message "Cleaning project"
           gradle(task: "clean")
         end
