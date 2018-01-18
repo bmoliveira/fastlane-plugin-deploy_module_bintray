@@ -9,10 +9,10 @@ module Fastlane
         UI.message "Deploying module: #{module_name} to bintray"
         if params[:should_clean]
           UI.message "Cleaning project"
-          gradle(task: "clean")
+          Actions::Gradle(task: "clean")
         end
-        gradle(task: ":#{module_name}:install")
-        gradle(task: ":#{module_name}:bintrayUpload")
+        Actions::Gradle(task: ":#{module_name}:install")
+        Actions::Gradle(task: ":#{module_name}:bintrayUpload")
         UI.message "Module uploaded: #{module_name} to bintray, go to bintray to upload to JCenter."
       end
 
