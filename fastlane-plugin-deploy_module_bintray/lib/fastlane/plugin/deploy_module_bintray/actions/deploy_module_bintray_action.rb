@@ -9,10 +9,10 @@ module Fastlane
         UI.message "Deploying module: #{module_name} to bintray"
         if params[:should_clean]
           UI.message "Cleaning project"
-          Actions::GradleAction.run(task: "clean")
+          Actions::GradleAction.run(task: "clean", project_dir: ".")
         end
-        Actions::GradleAction.run(task: ":#{module_name}:install")
-        Actions::GradleAction.run(task: ":#{module_name}:bintrayUpload")
+        Actions::GradleAction.run(task: ":#{module_name}:install", project_dir: ".")
+        Actions::GradleAction.run(task: ":#{module_name}:bintrayUpload", project_dir: ".")
         UI.message "Module uploaded: #{module_name} to bintray, go to bintray to upload to JCenter."
       end
 
