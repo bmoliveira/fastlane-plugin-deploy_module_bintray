@@ -6,7 +6,7 @@ module Fastlane
     class DeployModuleBintrayAction < Action
       def self.run(params)
         module_name = params[:module_name]
-        should_clean? = params[:should_clean?] ?: false
+        should_clean = params[:should_clean] ?: false
         UI.message "Deploying module: #{module_name} to bintray"
         if should_clean?
           UI.message "Cleaning project"
@@ -37,16 +37,16 @@ module Fastlane
       def self.available_options
         [
            FastlaneCore::ConfigItem.new(key: :module_name,
-                                   env_name: "FL_DEPLOY_MODULE_NAME",
+                                   env_name: "FL_DEPLOY_BINTRAY_MODULE_NAME",
                                 description: "project module to deploy",
                                    optional: false,
                                        type: String),
-           FastlaneCore::ConfigItem.new(key: :should_clean?,
-                                        env_name: "FL_DEPLOY_SHOULD_DEPLOY",
+           FastlaneCore::ConfigItem.new(key: :should_clean,
+                                        env_name: "FL_DEPLOY_BINTRAY_SHOULD_DEPLOY",
                                         description: "Flag to indicate if the project should be clean before install",
                                         optional: true,
                                         type: Boolean,
-                                        default_value: false))
+                                        default_value: false)
         ]
       end
 
