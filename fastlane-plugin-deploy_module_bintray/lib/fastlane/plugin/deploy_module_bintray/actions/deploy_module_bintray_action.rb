@@ -6,14 +6,19 @@ module Fastlane
     class DeployModuleBintrayAction < Action
       def self.run(params)
         module_name = params[:module_name]
-        UI.message "Deploying module: #{module_name} to bintray"
+        UI.message "Deploying module :#{module_name} to bintray"
         if params[:should_clean]
           UI.message "Cleaning project"
-          Actions::GradleAction.run(task: "clean", project_dir: ".")
+          cleanOptions = FastlaneCore::Configuration.create(Actions::GradleAction.available_options, { task: "clean" })
+          Actions::GradleAction.run(cleanOptions)
         end
-        Actions::GradleAction.run(task: ":#{module_name}:install", project_dir: ".")
-        Actions::GradleAction.run(task: ":#{module_name}:bintrayUpload", project_dir: ".")
-        UI.message "Module uploaded: #{module_name} to bintray, go to bintray to upload to JCenter."
+        installOptions = FastlaneCore::Configuration.create(Actions::GradleAction.available_options, { task: ":#{module_name}:install" })
+        cleanOptions = FastlaneCore::Configuration.create(Actions::GradleAction.available_options, { task: ":#{module_name}:bintrayUpload" })
+
+        Actions::GradleAction.run(installOptions)
+        UI.message "Uploading Module :#{module_name} to bintray"
+        Actions::GradleAction.run(cleanOptions)
+        UI.message "Module uploaded :#{module_name} to bintray, go to bintray to upload to JCenter."
       end
 
       def self.description
